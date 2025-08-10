@@ -1,20 +1,20 @@
 <p align="center">
-  <a href="https://github.com/ghoshRitesh12/aniwatch-api">
-    <img 
-      src="https://raw.githubusercontent.com/ghoshRitesh12/aniwatch-api/refs/heads/main/public/img/hianime_v2.png" 
-      alt="aniwatch_logo" 
-      width="175" 
-      height="175"
-      decoding="async"
-      fetchpriority="high"
-    />
-  </a>
+    <a href="https://github.com/ghoshRitesh12/aniwatch-api">
+        <img 
+            src="https://raw.githubusercontent.com/ghoshRitesh12/aniwatch-api/refs/heads/main/public/img/hianime_v2.png" 
+            alt="aniwatch_logo" 
+            width="175" 
+            height="175"
+            decoding="async"
+            fetchpriority="high"
+        />
+    </a>
 </p>
 
 # <p align="center">Aniwatch API</p>
 
 <div align="center">
-  A free RESTful API serving anime information from <a href="https://hianime.to" target="_blank">hianime.to</a>
+    A free RESTful API serving anime information from <a href="https://hianimez.to" target="_blank">hianimez.to</a>
 
   <br/>
 
@@ -55,35 +55,36 @@
 
 > [!IMPORTANT]
 >
-> 1. [https://api-aniwatch.onrender.com](https://api-aniwatch.onrender.com/) is only meant to demo the API and has rate-limiting enabled to minimize bandwidth consumption. It is recommended to deploy your own instance for personal use by customizing the API as you need it to be.
-> 2. This API is just an unofficial API for [hianime.to](https://hianime.to) and is in no other way officially related to the same.
+> 1. There was previously a hosted version of this API for showcasing purposes only, and it was misused; since then, there have been no other hosted versions. It is recommended to deploy your own instance for personal use by customizing the API as you need it to be.
+> 2. This API is just an unofficial API for [hianimez.to](https://hianimez.to) and is in no other way officially related to the same.
 > 3. The content that this API provides is not mine, nor is it hosted by me. These belong to their respective owners. This API just demonstrates how to build an API that scrapes websites and uses their content.
 
 ## Table of Contents
 
 - [Installation](#installation)
-  - [Local](#local)
-  - [Docker](#docker)
+    - [Local](#local)
+    - [Docker](#docker)
 - [Configuration](#️configuration)
-  - [Custom HTTP Headers](#custom-http-headers)
-  - [Environment Variables](#environment-variables)
+    - [Custom HTTP Headers](#custom-http-headers)
+    - [Environment Variables](#environment-variables)
 - [Host your instance](#host-your-instance)
-  - [Vercel](#vercel)
-  - [Render](#render)
+    - [Vercel](#vercel)
+    - [Render](#render)
 - [Documentation](#documentation)
-  - [GET Anime Home Page](#get-anime-home-page)
-  - [GET Anime A-Z List](#get-anime-a-z-list)
-  - [GET Anime Qtip Info](#get-anime-qtip-info)
-  - [GET Anime About Info](#get-anime-about-info)
-  - [GET Search Results](#get-search-results)
-  - [GET Search Suggestions](#get-search-suggestions)
-  - [GET Producer Animes](#get-producer-animes)
-  - [GET Genre Animes](#get-genre-animes)
-  - [GET Category Animes](#get-category-animes)
-  - [GET Estimated Schedules](#get-estimated-schedules)
-  - [GET Anime Episodes](#get-anime-episodes)
-  - [GET Anime Episode Servers](#get-anime-episode-servers)
-  - [GET Anime Episode Streaming Links](#get-anime-episode-streaming-links)
+    - [GET Anime Home Page](#get-anime-home-page)
+    - [GET Anime A-Z List](#get-anime-a-z-list)
+    - [GET Anime Qtip Info](#get-anime-qtip-info)
+    - [GET Anime About Info](#get-anime-about-info)
+    - [GET Search Results](#get-search-results)
+    - [GET Search Suggestions](#get-search-suggestions)
+    - [GET Producer Animes](#get-producer-animes)
+    - [GET Genre Animes](#get-genre-animes)
+    - [GET Category Animes](#get-category-animes)
+    - [GET Estimated Schedules](#get-estimated-schedules)
+    - [GET Anime Episodes](#get-anime-episodes)
+    - [GET Anime Next Episode Schedule](#get-anime-next-episode-schedule)
+    - [GET Anime Episode Servers](#get-anime-episode-servers)
+    - [GET Anime Episode Streaming Links](#get-anime-episode-streaming-links)
 - [Development](#development)
 - [Contributors](#contributors)
 - [Thanks](#thanks)
@@ -97,24 +98,24 @@
 
 1. Clone the repository and move into the directory.
 
-   ```bash
-   git clone https://github.com/ghoshRitesh12/aniwatch-api.git
-   cd aniwatch-api
-   ```
+    ```bash
+    git clone https://github.com/ghoshRitesh12/aniwatch-api.git
+    cd aniwatch-api
+    ```
 
 2. Install all the dependencies.
 
-   ```bash
-   npm i #or yarn install or pnpm i
-   ```
+    ```bash
+    npm i #or yarn install or pnpm i
+    ```
 
 3. Start the server!
 
-   ```bash
-   npm start #or yarn start or pnpm start
-   ```
+    ```bash
+    npm start #or yarn start or pnpm start
+    ```
 
-   Now the server should be running on [http://localhost:4000](http://localhost:4000)
+    Now the server should be running on [http://localhost:4000](http://localhost:4000)
 
 ### Docker
 
@@ -136,21 +137,21 @@ The `-d` flag runs the container in detached mode, and the `--name` flag is used
 
 Currently this API supports parsing of only one custom header, and more may be implemented in the future to accommodate varying needs.
 
-- `X-ANIWATCH-CACHE-EXPIRY`: this custom header is used to specify the cache expiration duration in **seconds** (defaults to 60 if the header is missing). The `ANIWATCH_API_REDIS_CONN_URL` env is required for this custom header to function as intended; otherwise, there's no point in setting this custom header.
+- `Aniwatch-Cache-Expiry`: This custom request header is used to specify the cache expiration duration in **seconds** (defaults to 300 or 5 mins if the header is missing). The `ANIWATCH_API_REDIS_CONN_URL` env is required for this custom header to function as intended; otherwise, there's no point in setting this custom request header. A **response header** of the same name is also returned with the value set to the cache expiration duration in seconds if `ANIWATCH_API_REDIS_CONN_URL` env is set.
 
 ### Environment Variables
 
 More info can be found in the [`.env.example`](https://github.com/ghoshRitesh12/aniwatch-api/blob/main/.env.example) file, where envs' having a value that is contained within `<` `>` angled brackets, commented out or not, are just examples and should be replaced with relevant ones.
 
-- `ANIWATCH_API_PORT`: port number of the aniwatch API.
-- `ANIWATCH_API_WINDOW_MS`: duration to track requests for rate limiting (in milliseconds).
-- `ANIWATCH_API_MAX_REQS`: maximum number of requests in the `ANIWATCH_API_WINDOW_MS` time period.
-- `ANIWATCH_API_CORS_ALLOWED_ORIGINS`: allowed origins, separated by commas and no spaces in between.
-- `ANIWATCH_API_VERCEL_DEPLOYMENT`: required for distinguishing Vercel deployment from other ones; set it to true or any other non-zero value.
-- `ANIWATCH_API_HOSTNAME`: set this to your api instance's hostname to enable rate limiting, don't have this value if you don't wish to rate limit.
-- `ANIWATCH_API_REDIS_CONN_URL`: this env is optional by default and can be set to utilize Redis caching functionality. It has to be a valid connection URL; otherwise, the Redis client can throw unexpected errors.
-- `ANIWATCH_API_S_MAXAGE`: specifies the maximum amount of time (in seconds) a resource is considered fresh when served by a CDN cache.
-- `ANIWATCH_API_STALE_WHILE_REVALIDATE`: specifies the amount of time (in seconds) a resource is served stale while a new one is fetched.
+- `ANIWATCH_API_PORT`: Port number of the aniwatch API.
+- `ANIWATCH_API_WINDOW_MS`: Duration to track requests for rate limiting (in milliseconds).
+- `ANIWATCH_API_MAX_REQS`: Maximum number of requests in the `ANIWATCH_API_WINDOW_MS` time period.
+- `ANIWATCH_API_CORS_ALLOWED_ORIGINS`: Allowed origins, separated by commas and no spaces in between (CSV).
+- `ANIWATCH_API_DEPLOYMENT_ENV`: The deployment environment of the Aniwatch API. Many configurations depend on this env, rate limiting being one of them. It must be set incase of serverless deployments; otherwise, you may run into weird issues. Possible values: `'nodejs' | 'docker' | 'vercel' | 'render' | 'cloudflare-workers'`.
+- `ANIWATCH_API_HOSTNAME`: Set this to your api instance's hostname to enable rate limiting, don't have this value if you don't wish to rate limit.
+- `ANIWATCH_API_REDIS_CONN_URL`: This env is optional by default and can be set to utilize Redis caching functionality. It has to be a valid connection URL; otherwise, the Redis client can throw unexpected errors.
+- `ANIWATCH_API_S_MAXAGE`: Specifies the maximum amount of time (in seconds) a resource is considered fresh when served by a CDN cache.
+- `ANIWATCH_API_STALE_WHILE_REVALIDATE`: Specifies the amount of time (in seconds) a resource is served stale while a new one is fetched.
 
 ## <span id="host-your-instance">⛅ Host your instance</span>
 
@@ -160,21 +161,26 @@ More info can be found in the [`.env.example`](https://github.com/ghoshRitesh12/
 >
 > - If you want to have rate limiting in your application, then set the `ANIWATCH_API_HOSTNAME` env to your deployed instance's hostname; otherwise, don't set or have this env at all. If you set this env to an incorrect value, you may face other issues.
 > - It's optional by default, but if you want to have endpoint response caching functionality, then set the `ANIWATCH_API_REDIS_CONN_URL` env to a valid Redis connection URL. If the connection URL is invalid, the Redis client can throw unexpected errors.
-> - Remove the if block from the [`server.ts`](https://github.com/ghoshRitesh12/aniwatch-api/blob/main/src/server.ts) file, spanning from lines [61](https://github.com/ghoshRitesh12/aniwatch-api/blob/main/src/server.ts#L61) to [85](https://github.com/ghoshRitesh12/aniwatch-api/blob/main/src/server.ts#L85).
+> - You **may or may not** wanna remove the last `if` block within the [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) in the [`server.ts`](https://github.com/ghoshRitesh12/aniwatch-api/blob/main/src/server.ts) file. It is for **render free deployments** only, as their free tier has an approx 10 or 15 minute sleep time. That `if` block keeps the server awake and prevents it from sleeping. You can enable the automatic health check by setting the environment variables `ANIWATCH_API_HOSTNAME` to your deployment's hostname, and `ANIWATCH_API_DEPLOYMENT_ENV` to `render` in your environment variables. If you are not using render, you can remove that `if` block.
+> - If you are using a serverless deployment, then set the `ANIWATCH_API_DEPLOYMENT_ENV` env to `vercel` or `render` or `cloudflare-workers` depending on your deployment platform. This is because the API uses this env to configure different functionalities, such as rate limiting, graceful shutdown or hosting static files.
 
 ### Vercel
 
 Deploy your own instance of Aniwatch API on Vercel.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ghoshRitesh12/aniwatch-api)
-
 > [!NOTE]
 >
-> When deploying to vercel, set an env named `ANIWATCH_API_VERCEL_DEPLOYMENT` to `true` or any non-zero value, but this env must be present.
+> When deploying to vercel, you must set the env named `ANIWATCH_API_DEPLOYMENT_ENV` to `vercel` for proper functioning of the API.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ghoshRitesh12/aniwatch-api)
 
 ### Render
 
 Deploy your own instance of Aniwatch API on Render.
+
+> [!NOTE]
+>
+> When deploying to render, you must set the env named `ANIWATCH_API_DEPLOYMENT_ENV` to `render` for proper functioning of the API.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ghoshRitesh12/aniwatch-api)
 
@@ -661,7 +667,7 @@ console.log(data);
 
 // advanced example
 const resp = await fetch(
-  "/api/v2/hianime/search?q=girls&genres=action,adventure&type=movie&sort=score&season=spring&language=dub&status=finished-airing&rated=pg-13&start_date=2014-0-0&score=good"
+    "/api/v2/hianime/search?q=girls&genres=action,adventure&type=movie&sort=score&season=spring&language=dub&status=finished-airing&rated=pg-13&start_date=2014-0-0&score=good"
 );
 const data = await resp.json();
 console.log(data);
@@ -1146,6 +1152,53 @@ console.log(data);
 
 <summary>
 
+### `GET` Anime Next Episode Schedule
+
+</summary>
+
+#### Endpoint
+
+```sh
+/api/v2/hianime/anime/{animeId}/next-episode-schedule
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |     Description      | Required? | Default |
+| :-------: | :----: | :------------------: | :-------: | :-----: |
+| `animeId` | string | The unique anime id. |    Yes    |   --    |
+
+#### Request Sample
+
+```javascript
+const resp = await fetch(
+    "/api/v2/hianime/anime/steinsgate-3/next-episode-schedule"
+);
+const data = await resp.json();
+console.log(data);
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: true,
+  data: {
+    airingISOTimestamp: string | null,
+    airingTimestamp: number | null,
+    secondsUntilAiring: number | null
+  }
+}
+```
+
+[🔼 Back to Top](#table-of-contents)
+
+</details>
+
+<details>
+
+<summary>
+
 ### `GET` Anime Episode Servers
 
 </summary>
@@ -1166,7 +1219,7 @@ console.log(data);
 
 ```javascript
 const resp = await fetch(
-  "/api/v2/hianime/episode/servers?animeEpisodeId=steinsgate-0-92?ep=2055"
+    "/api/v2/hianime/episode/servers?animeEpisodeId=steinsgate-0-92?ep=2055"
 );
 const data = await resp.json();
 console.log(data);
@@ -1235,7 +1288,7 @@ console.log(data);
 
 ```javascript
 const resp = await fetch(
-  "/api/v2/hianime/episode/sources?animeEpisodeId=steinsgate-3?ep=230&server=hd-1&category=dub"
+    "/api/v2/hianime/episode/sources?animeEpisodeId=steinsgate-3?ep=230&server=hd-1&category=dub"
 );
 const data = await resp.json();
 console.log(data);
@@ -1291,6 +1344,8 @@ Thanks to the following people for keeping this project alive and relevant.
 
 - [consumet.ts](https://github.com/consumet/consumet.ts)
 - [api.consumet.org](https://github.com/consumet/api.consumet.org)
+- [@itzzzme](https://github.com/itzzzme)
+- [@Ciarands](https://github.com/Ciarands)
 
 ## <span id="support">🙌 Support</span>
 
